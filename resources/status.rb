@@ -31,9 +31,12 @@ end
 
 action_class do
   def return_status
-    cmd = powershell_out!('Get-MpComputerStatus | Select -ExpandProperty RealTimeProtectionEnabled', timeout: new_resource.timeout)
-    Chef::Log.info(cmd.stdout)
-    only_if enabled?
+    if enabled?
+      cmd = powershell_out!('Get-MpComputerStatus | Select -ExpandProperty RealTimeProtectionEnabled', timeout: new_resource.timeout)
+      Chef::Log.info(cmd.stdout)
+    else
+      Chef::Log.warn('Defender not enabled.')
+    end
   end
 
   def return_preference(preference)
