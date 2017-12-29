@@ -29,12 +29,12 @@ end
 
 action_class do
   def return_status
-    cmd = powershell_out!('Import-Module Defender; Get-MpComputerStatus', timeout: new_resource.timeout)
+    cmd = powershell_out!('Get-MpComputerStatus', timeout: new_resource.timeout)
     Chef::Log.info(cmd.stdout)
   end
 
   def return_preference(preference)
-    cmd = powershell_out!("Import-Module Defender; Get-MpPreference -#{preference}", timeout: new_resource.timeout)
+    cmd = powershell_out!("Get-MpPreference -#{preference}", timeout: new_resource.timeout)
     Chef::Log.info(cmd.stdout)
   end
 end

@@ -18,6 +18,7 @@ install:
   - ps: iex (irm https://omnitruck.chef.io/install.ps1); Install-Project -Project chefdk -channel current
   - ps: 'Get-CimInstance win32_operatingsystem -Property Caption, OSArchitecture, Version | fl Caption, OSArchitecture, Version'
   - ps: $PSVersionTable
+  - ps: 'Install-WindowsFeature Windows-Defender'
   - c:\opscode\chefdk\bin\chef.bat exec ruby --version
   - c:\opscode\chefdk\bin\chef.bat gem install kitchen-pester
   - ps: secedit /export /cfg $env:temp/export.cfg
