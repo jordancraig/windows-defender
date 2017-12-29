@@ -1,5 +1,5 @@
 #
-# Cookbook:: windows-defender
+# Cookbook:: windows_defender
 # Recipe:: default
 #
 #

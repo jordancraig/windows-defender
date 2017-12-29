@@ -1,6 +1,6 @@
 #
 # Author:: Jordan Craig (<jordan@jwac.me>)
-# Cookbook:: windows-defender
+# Cookbook:: windows_defender
 # Resource:: status
 #
 # Copyright:: 2011-2017, Business Intelligence Associates, Inc

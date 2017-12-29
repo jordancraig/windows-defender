@@ -1,4 +1,4 @@
-name 'windows-defender'
+name 'windows_defender'
 maintainer 'Jordan Craig'
 maintainer_email 'jordan@jwac.me'
 license 'Apache 2.0'
