@@ -26,6 +26,8 @@ property :timeout, Integer, default: 600
 property :preference, String
 
 action :status do
+  guard_interpreter :powershell_script
+  only_if enabled?
   return_status
 end
 
