@@ -1,7 +1,7 @@
 #
 # Author:: Jordan Craig (<jordan@jwac.me>)
 # Cookbook:: windows_defender
-# Resource:: status
+# Resource:: config
 #
 # Copyright:: 2011-2017, Business Intelligence Associates, Inc
 # Copyright:: 2017, Chef Software, Inc.
@@ -18,28 +18,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-include Chef::Mixin::PowershellOut
-
-property :timeout, Integer, default: 600
-property :preference, String
-
-action :status do
-  return_status
-end
-
-action_class do
-  def return_status
-    cmd = powershell_out!('Get-MpComputerStatus', timeout: new_resource.timeout)
-    if cmd.stderr.include? 'extrinsic' || cmd.error!
-      Chef::Log.error('Defender is disabled. Enable using the enable recipe.')
-    elsif cmd.stderr.empty?
-      Chef::Log.info(cmd.stdout)
-    end
-  end
-
-  def return_preference(preference)
-    cmd = powershell_out!("Get-MpPreference -#{preference}", timeout: new_resource.timeout)
-    Chef::Log.info(cmd.stdout)
-  end
-end
