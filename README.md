@@ -13,5 +13,7 @@ Provides a set of specific resources that can be used to manage Windows Defender
 - Windows 8.1
 - Windows 8
 
+*** Supported on 2012R2 Core and other 2012 systems with Desktop Experience enabled. ***
+
 ### Chef
 - Chef 12.7+

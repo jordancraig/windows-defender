@@ -29,6 +29,7 @@ install:
   - ps: net localgroup administrators $env:machine_user /add
 
 build_script:
+  - ps: 'Import-Module Defender'
   - ps: c:\opscode\chefdk\bin\chef.bat shell-init powershell | iex; cmd /c c:\opscode\chefdk\bin\chef.bat --version
 
 test_script:
