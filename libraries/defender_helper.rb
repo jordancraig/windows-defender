@@ -19,6 +19,12 @@
 
 module WindowsDefender
   module Helper
+    def enabled?
+      @enabled ||= begin
+        cmd = powershell_out('Import-Module ServerManager; @(Get-WindowsFeature Windows-Defender | ?{$_.Installed -ne $TRUE}).count', 600)
+        cmd.stderr.empty? && cmd.stdout.chomp.to_i == 0
+      end
+    end
   end
 end
 

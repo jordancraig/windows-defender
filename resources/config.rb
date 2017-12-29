@@ -20,21 +20,24 @@
 #
 
 include Chef::Mixin::PowershellOut
+include WindowsDefender::Helper
+
+property :timeout, Integer, default: 600
 
 action :enable do
-  enable
+  monitoring_state(true)
 end
 
 action :disable do
-  disable
+  monitoring_state(false)
 end
 
 action_class do
-  def enable
-
-  end
-
-  def disable
-
+  def monitoring_state(state)
+    converge_by("Setting Defender status to #{state}") do
+      cmd = powershell_out!("Set-MpPreference -DisableRealtimeMonitoring $#{state}", timeout: new_resource.timeout)
+      Chef::Log.info(cmd.stdout)
+      only_if enabled?
+    end
   end
 end

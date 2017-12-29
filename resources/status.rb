@@ -20,6 +20,7 @@
 #
 
 include Chef::Mixin::PowershellOut
+include WindowsDefender::Helper
 
 property :timeout, Integer, default: 600
 property :preference, String
@@ -31,11 +32,8 @@ end
 action_class do
   def return_status
     cmd = powershell_out!('Get-MpComputerStatus', timeout: new_resource.timeout)
-    if cmd.stderr.include?('extrinsic') || cmd.error!
-      Chef::Log.error('Defender is disabled. Enable using the enable recipe.')
-    elsif cmd.stderr.empty?
-      Chef::Log.info(cmd.stdout)
-    end
+    Chef::Log.info(cmd.stdout)
+    only_if enabled?
   end
 
   def return_preference(preference)
