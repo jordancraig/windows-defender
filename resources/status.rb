@@ -23,11 +23,11 @@ include Chef::Mixin::PowershellOut
 property :timeout, Integer, default: 600
 
 action :status do
-  get_status
+  return_status
 end
 
 action_class do
-  def get_status
+  def return_status
     cmd = powershell_out!('Get-MpComputerStatus', timeout: new_resource.timeout)
     Chef::Log.info(cmd.stdout)
   end
