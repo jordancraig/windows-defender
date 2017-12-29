@@ -1,4 +1,5 @@
 # Windows Defender
+[![Build status](https://ci.appveyor.com/api/projects/status/6sqy0tv3allk79d3?svg=true)
 
 Provides a set of specific resources that can be used to manage Windows Defender on supported systems.
 
