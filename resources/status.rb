@@ -33,7 +33,7 @@ action_class do
     Chef::Log.info(cmd.stdout)
   end
 
-  def return_preference(preference) do
+  def return_preference(preference)
     cmd = powershell_out!("Import-Module Defender; Get-MpPreference -#{preference}", timeout: new_resource.timeout)
   end
 end
