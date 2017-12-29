@@ -30,7 +30,11 @@ end
 action_class do
   def return_status
     cmd = powershell_out!('Get-MpComputerStatus', timeout: new_resource.timeout)
-    Chef::Log.info(cmd.stdout)
+    if cmd.stderr.include? "extrinsic"
+      Chef::Log.error("Defender is disabled. Enable using the enable recipe.")
+    elseif cmd.stderr.empty?
+      Chef::Log.info(cmd.stdout)
+    end
   end
 
   def return_preference(preference)
