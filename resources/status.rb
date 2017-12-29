@@ -18,6 +18,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 include Chef::Mixin::PowershellOut
 
 property :timeout, Integer, default: 600
@@ -32,7 +33,7 @@ action_class do
     cmd = powershell_out!('Get-MpComputerStatus', timeout: new_resource.timeout)
     if cmd.stderr.include? 'extrinsic'
       Chef::Log.error('Defender is disabled. Enable using the enable recipe.')
-    elseif cmd.stderr.empty?
+    elsif cmd.stderr.empty?
       Chef::Log.info(cmd.stdout)
     end
   end
