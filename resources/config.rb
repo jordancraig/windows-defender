@@ -18,3 +18,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+include Chef::Mixin::PowershellOut
+
+action :enable do
+  enable
+end
+
+action :disable do
+  disable
+end
+
+action_class do
+  def enable
+
+  end
+
+  def disable
+
+  end
+end
