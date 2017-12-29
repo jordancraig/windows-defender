@@ -1,3 +1,12 @@
+version: "master-{build}"
+
+image:
+- Visual Studio 2017
+
+os: Windows Server 2016
+platform:
+  - x64
+
 environment:
   machine_user: vagrant
   machine_pass: vagrant
