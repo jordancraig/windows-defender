@@ -25,6 +25,10 @@ include WindowsDefender::Helper
 property :timeout, Integer, default: 600
 property :preference, String
 
+action :check_enabled do
+  Chef::Log.info("Windows Defender enabled status is currently: #{enabled?}")
+end
+
 action :status do
   guard_interpreter :powershell_script
   only_if enabled?
