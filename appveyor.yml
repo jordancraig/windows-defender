@@ -1,4 +1,7 @@
-version: "master-{build}"
+version: "1.0-{build}"
+
+build:
+  verbosity: detailed
 
 image:
 - Visual Studio 2017
@@ -7,10 +10,6 @@ environment:
   machine_user: vagrant
   machine_pass: vagrant
   KITCHEN_YAML: .kitchen.appveyor.yml
-
-branches:
-  only:
-    - master
 
 # Do not build on tags (GitHub only)
 skip_tags: true

@@ -1,3 +1,6 @@
+Layout/EndOfLine:
+  Enabled: false
+
 Style/GuardClause:
   Exclude:
     - 'resources/status.rb'
