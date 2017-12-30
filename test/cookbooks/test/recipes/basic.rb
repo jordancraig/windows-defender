@@ -17,3 +17,9 @@ windows_defender_config 'scan on sundays' do
   action :scanday
   day 7
 end
+
+# Disable auto exclusions
+windows_defender_config 'disable auto exclusions' do
+  action :dae
+  autoexclusion true
+end

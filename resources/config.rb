@@ -23,6 +23,7 @@ include WindowsDefender::Helper
 
 property :timeout, Integer, default: 600
 property :day, Integer, default: 0
+property :autoexclusion, [true, false], default: false
 
 action :enable_monitoring do
   monitoring_state(true)
@@ -39,6 +40,11 @@ end
 action :scanday do
   scan_day(new_resource.day)
 end
+
+action :dae do
+  disable_auto_exclusion(new_resource.autoexclusion)
+end
+
 action_class do
   def install_feature_cmdlet
     node['os_version'].to_f < 6.2 ? 'Import-Module ServerManager; Add-WindowsFeature' : 'Install-WindowsFeature'
@@ -66,6 +72,12 @@ action_class do
 
   def scan_day(day)
     cmd = powershell_out("Set-MpPreference -ScanScheduleDay #{day}", timeout: new_resource.timeout)
+    Chef::Log.info(cmd.stdout)
+    only_if enabled?
+  end
+
+  def disable_auto_exclusion(opt)
+    cmd = powershell_out("Set-MpPreference -DisableAutoExclusions #{opt}", timeout: new_resource.timeout)
     Chef::Log.info(cmd.stdout)
     only_if enabled?
   end
