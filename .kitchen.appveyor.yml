@@ -10,7 +10,7 @@ driver:
 provisioner:
   name: chef_zero
   deprecations_as_errors: true
-  log_level: <%= ENV['CHEF_LOG_LEVEL'] || "debug" %>
+  log_level: <%= ENV['CHEF_LOG_LEVEL'] || "info" %>
 
 platforms:
   - name: windows-2016
