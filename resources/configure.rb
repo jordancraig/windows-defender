@@ -37,7 +37,7 @@ end
 action_class.class_eval do
   def configure(props)
     props.each do |p|
-      cmd = powershell_out("Set-MpPreference -#{find_command(p)} $#{state}", timeout: new_resource.timeout)
+      cmd = powershell_out("Set-MpPreference -#{find_command(p)} $#{new_resource.p}", timeout: new_resource.timeout)
       Chef::Log.info(cmd.stdout)
     end
     only_if enabled?
