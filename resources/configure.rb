@@ -28,7 +28,7 @@ property :disable_catchup_scan, [true, false], default: true
 
 action :configure do
   props = []
-  PROPERTIES.each do |p|
+  WindowsDefender::Helper::PROPERTIES.each do |p|
     props << p if property_is_set?(p)
   end
   configure(props)

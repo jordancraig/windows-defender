@@ -19,6 +19,8 @@
 
 module WindowsDefender
   module Helper
+    attr_reader :PROPERTIES
+
     COMMANDS = {
       'DisableBlockAtFirstSeen' => { property: 'disable_block_first', command: 'DisableBlockAtFirstSeen' },
       'DisableCatchupFullScan' => { property: 'disable_catchup_scan', command: 'DisableCatchupFullScan' },
