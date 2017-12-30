@@ -22,7 +22,6 @@
 include Chef::Mixin::PowershellOut
 include WindowsDefender::Helper
 
-days = %w(Everyday Monday Tuesday Wednesday Thursday Friday Saturday Sunday Never)
 property :timeout, Integer, default: 600
 property :preference, String
 
@@ -52,6 +51,7 @@ action_class do
   end
 
   def scan_day(preference)
+    days = %w(Everyday Monday Tuesday Wednesday Thursday Friday Saturday Sunday Never)
     cmd = powershell_out("Get-MpPreference | Select -ExpandProperty #{preference}", timeout: new_resource.timeout)
     Chef::Log.info(days[cmd.stdout])
     only_if enabled?
