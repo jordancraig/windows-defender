@@ -19,14 +19,12 @@
 
 module WindowsDefender
   module Helper
-    attr_reader :PROPERTIES
-
     COMMANDS = {
       'DisableBlockAtFirstSeen' => { property: 'disable_block_first', command: 'DisableBlockAtFirstSeen' },
       'DisableCatchupFullScan' => { property: 'disable_catchup_scan', command: 'DisableCatchupFullScan' },
     }.freeze
 
-    $PROPERTIES = %w(
+    PROPERTIES = %w(
       disable_block_first
       disable_catchup_scan
     )
@@ -35,6 +33,10 @@ module WindowsDefender
       COMMANDS.each do |_k, v|
         return v[:command] if v[:property].to_s == property
       end
+    end
+
+    def get_properties
+      return PROPERTIES
     end
 
     def enabled?
