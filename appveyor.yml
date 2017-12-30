@@ -33,6 +33,7 @@ install:
 
 build_script:
   - ps: c:\opscode\chefdk\bin\chef.bat shell-init powershell | iex; cmd /c c:\opscode\chefdk\bin\chef.bat --version
+  - c:\opscode\chefdk\bin\chef.bat exec kitchen converge
 
 test_script:
   - c:\opscode\chefdk\bin\cookstyle --version
