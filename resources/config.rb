@@ -24,20 +24,48 @@ include WindowsDefender::Helper
 
 property :timeout, Integer, default: 600
 
-action :enable do
+action :enable_monitoring do
   monitoring_state(true)
 end
 
-action :disable do
+action :disable_monitoring do
   monitoring_state(false)
 end
 
+action :enable_feature do
+  enable_defender
+end
+
 action_class do
+  def install_feature_cmdlet
+    node['os_version'].to_f < 6.2 ? 'Import-Module ServerManager; Add-WindowsFeature' : 'Install-WindowsFeature'
+  end
+
+  def remove_feature_cmdlet
+    node['os_version'].to_f < 6.2 ? 'Import-Module ServerManager; Remove-WindowsFeature' : 'Uninstall-WindowsFeature'
+  end
+
   def monitoring_state(state)
-    converge_by("Setting Defender status to #{state}") do
-      cmd = powershell_out!("Set-MpPreference -DisableRealtimeMonitoring $#{state}", timeout: new_resource.timeout)
-      Chef::Log.info(cmd.stdout)
-      only_if enabled?
-    end
+    cmd = powershell_out("Set-MpPreference -DisableRealtimeMonitoring $#{state}", timeout: new_resource.timeout)
+    Chef::Log.info(cmd.stdout)
+    only_if enabled?
+  end
+
+  def enable_defender
+    cmd = if node['os_version'].to_f < 6.2
+        powershell_out!("#{install_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
+      else
+        powershell_out!("#{install_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
+      end
+    Chef::Log.info(cmd.stdout)
+  end
+
+  def disable_defender
+    cmd = if node['os_version'].to_f < 6.2
+        powershell_out!("#{remove_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
+      else
+        powershell_out!("#{remove_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
+      end
+    Chef::Log.info(cmd.stdout)
   end
 end
