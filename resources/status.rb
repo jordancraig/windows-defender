@@ -53,7 +53,7 @@ action_class do
   def scan_day(preference)
     days = %w(Everyday Monday Tuesday Wednesday Thursday Friday Saturday Sunday Never)
     cmd = powershell_out("Get-MpPreference | Select -ExpandProperty #{preference}", timeout: new_resource.timeout)
-    Chef::Log.info(days[cmd.stdout])
+    Chef::Log.info(days[cmd.stdout.to_i])
     only_if enabled?
   end
 end
