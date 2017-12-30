@@ -15,5 +15,5 @@ end
 # Set scans to run on Sundays
 windows_defender_config 'scan on sundays' do
   action :scanday
-  day: 7
+  day 7
 end
