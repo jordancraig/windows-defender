@@ -19,7 +19,7 @@
 
 module WindowsDefender
   module Helper
-    days = %w(Everyday Monday Tuesday Wednesday Thursday Friday Saturday Sunday Never)
+    $days = %w(Everyday Monday Tuesday Wednesday Thursday Friday Saturday Sunday Never)
 
     def enabled?
       @enabled ||= begin
