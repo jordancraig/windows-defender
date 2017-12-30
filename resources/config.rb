@@ -52,20 +52,12 @@ action_class do
   end
 
   def enable_defender
-    cmd = if node['os_version'].to_f < 6.2
-            powershell_out!("#{install_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
-          else
-            powershell_out!("#{install_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
-          end
+    cmd = powershell_out!("#{install_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
     Chef::Log.info(cmd.stdout)
   end
 
   def disable_defender
-    cmd = if node['os_version'].to_f < 6.2
-            powershell_out!("#{remove_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
-          else
-            powershell_out!("#{remove_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
-          end
+    cmd = powershell_out!("#{remove_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
     Chef::Log.info(cmd.stdout)
   end
 end
