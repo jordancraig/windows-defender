@@ -1,3 +1,6 @@
+Layout/EndOfLine:
+  EnforcedStyle: crlf
+
 Style/GuardClause:
   Exclude:
     - 'resources/status.rb'
