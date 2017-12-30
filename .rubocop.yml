@@ -7,4 +7,5 @@ Style/GuardClause:
 
 Lint/UselessAssignment:
   Exclude:
-    - 'libraries/defender_helper.rb'
+    - 'resources/status.rb'
+    - 'resources/config.rb'

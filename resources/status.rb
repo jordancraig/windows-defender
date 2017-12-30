@@ -22,6 +22,7 @@
 include Chef::Mixin::PowershellOut
 include WindowsDefender::Helper
 
+days = %w(Everyday Monday Tuesday Wednesday Thursday Friday Saturday Sunday Never)
 property :timeout, Integer, default: 600
 property :preference, String
 
