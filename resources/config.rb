@@ -51,12 +51,12 @@ action_class do
   end
 
   def enable_defender
-    cmd = powershell_out!("#{install_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
+    cmd = powershell_out!("#{install_feature_cmdlet} Windows-Defender", timeout: new_resource.timeout)
     Chef::Log.info(cmd.stdout)
   end
 
   def disable_defender
-    cmd = powershell_out!("#{remove_feature_cmdlet} WindowsDefender", timeout: new_resource.timeout)
+    cmd = powershell_out!("#{remove_feature_cmdlet} Windows-Defender", timeout: new_resource.timeout)
     Chef::Log.info(cmd.stdout)
   end
 end
