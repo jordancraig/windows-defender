@@ -19,6 +19,22 @@
 
 module WindowsDefender
   module Helper
+    COMMANDS = {
+      'DisableBlockAtFirstSeen' => { property: 'disable_block_first', command: 'DisableBlockAtFirstSeen' },
+      'DisableCatchupFullScan' => { property: 'disable_catchup_scan', command: 'DisableCatchupFullScan' },
+    }.freeze
+
+    $PROPERTIES = %w(
+      disable_block_first
+      disable_catchup_scan
+    )
+
+    def find_command(property)
+      COMMANDS.each do |_k, v|
+        return v[:command] if v[:property].to_s == property
+      end
+    end
+
     def enabled?
       @enabled ||= begin
         cmd = if node['os_version'].to_f < 6.2

@@ -5,6 +5,10 @@ Style/GuardClause:
   Exclude:
     - 'resources/status.rb'
 
+Style/GlobalVars:
+  Exclude:
+    - 'libraries/defender_helper.rb'
+
 Lint/UselessAssignment:
   Exclude:
     - 'resources/status.rb'
