@@ -4,3 +4,7 @@ Layout/EndOfLine:
 Style/GuardClause:
   Exclude:
     - 'resources/status.rb'
+
+Lint/UselessAssignment:
+  Exclude:
+    - 'libraries/defender_helper.rb'
