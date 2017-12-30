@@ -36,7 +36,7 @@ end
 
 action_class.class_eval do
   def configure(props)
-    props.each_with_index do |p, index|
+    props.each do |p|
       cmd = powershell_out("Set-MpPreference -#{find_command(p)} $#{p}", timeout: new_resource.timeout)
       Chef::Log.info(cmd.stdout)
     end
