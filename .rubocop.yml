@@ -1,5 +1,5 @@
 Layout/EndOfLine:
-  EnforcedStyle: crlf
+  Enabled: false
 
 Style/GuardClause:
   Exclude:
