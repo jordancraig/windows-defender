@@ -5,6 +5,10 @@ Style/GuardClause:
   Exclude:
     - 'resources/status.rb'
 
+Style/Next:
+  Exclude:
+    - 'resources/configure.rb'
+
 Lint/UselessAssignment:
   Exclude:
     - 'resources/status.rb'

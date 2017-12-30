@@ -27,7 +27,7 @@ module WindowsDefender
     PROPERTIES = %w(
       disable_block_first
       disable_catchup_scan
-    )
+    ).freeze
 
     def find_command(property)
       COMMANDS.each do |_k, v|
@@ -35,8 +35,8 @@ module WindowsDefender
       end
     end
 
-    def get_properties
-      return PROPERTIES
+    def return_properties
+      PROPERTIES
     end
 
     def enabled?
