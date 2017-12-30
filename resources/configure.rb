@@ -28,16 +28,22 @@ property :disable_catchup_scan, [true, false], default: true
 
 action :configure do
   props = []
-  get_properties.each do |p|
-    props << p if property_is_set?(p)
+  vals = []
+  return_properties.each do |p|
+    if property_is_set?(p)
+      props << p
+      load_current_value do |val|
+        vals << val
+      end
+    end
   end
-  configure(props)
+  configure(props, vals)
 end
 
 action_class.class_eval do
-  def configure(props)
-    props.each do |p|
-      cmd = powershell_out("Set-MpPreference -#{find_command(p)} $#{new_resource.p}", timeout: new_resource.timeout)
+  def configure(props, vals)
+    props.each_with_index do |p, index|
+      cmd = powershell_out("Set-MpPreference -#{find_command(p)} $#{vals[index]}", timeout: new_resource.timeout)
       Chef::Log.info(cmd.stdout)
     end
     only_if enabled?
