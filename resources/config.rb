@@ -22,6 +22,7 @@ include Chef::Mixin::PowershellOut
 include WindowsDefender::Helper
 
 property :timeout, Integer, default: 600
+property :day, Integer, default: 0
 
 action :enable_monitoring do
   monitoring_state(true)
@@ -35,6 +36,9 @@ action :enable_feature do
   enable_defender
 end
 
+action :scanday do
+  scan_day(new_resource.day)
+end
 action_class do
   def install_feature_cmdlet
     node['os_version'].to_f < 6.2 ? 'Import-Module ServerManager; Add-WindowsFeature' : 'Install-WindowsFeature'
@@ -58,5 +62,11 @@ action_class do
   def disable_defender
     cmd = powershell_out!("#{remove_feature_cmdlet} Windows-Defender", timeout: new_resource.timeout)
     Chef::Log.info(cmd.stdout)
+  end
+
+  def scan_day(day)
+    cmd = powershell_out("Set-MpPreference -ScanScheduleDay #{day}", timeout: new_resource.timeout)
+    Chef::Log.info(cmd.stdout)
+    only_if enabled?
   end
 end
