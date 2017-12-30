@@ -19,6 +19,8 @@
 
 module WindowsDefender
   module Helper
+    days = ['Everyday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','Never']
+
     def enabled?
       @enabled ||= begin
         cmd = if node['os_version'].to_f < 6.2

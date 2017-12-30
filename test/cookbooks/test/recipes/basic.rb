@@ -6,3 +6,8 @@ end
 windows_defender_status 'status' do
   action :check_enabled
 end
+
+# Check when scans run.
+windows_defender_status 'scan schedule' do
+  action :scanday
+end

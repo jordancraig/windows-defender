@@ -35,6 +35,11 @@ action :status do
   return_status
 end
 
+action :scanday do
+  preference = new_resource.preference
+  scan_day(preference)
+end
+
 action_class do
   def return_status
     if enabled?
@@ -45,9 +50,9 @@ action_class do
     end
   end
 
-  def return_preference(preference)
-    cmd = powershell_out("Get-MpPreference -#{preference}", timeout: new_resource.timeout)
-    Chef::Log.info(cmd.stdout)
+  def scan_day(preference)
+    cmd = powershell_out("Get-MpPreference | Select -ExpandProperty #{preference}", timeout: new_resource.timeout)
+    Chef::Log.info(days[cmd.stdout])
     only_if enabled?
   end
 end
