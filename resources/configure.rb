@@ -21,6 +21,7 @@
 
 include Chef::Mixin::PowershellOut
 include WindowsDefender::Helper
+include Chef::Property
 
 property :timeout, Integer, default: 600
 property :disable_block_first, [true, false], default: true
@@ -37,7 +38,8 @@ end
 action_class.class_eval do
   def configure(props)
     props.each do |p|
-      cmd = powershell_out("Set-MpPreference -#{find_command(p)} $#{p}", timeout: new_resource.timeout)
+      cmd = powershell_out("Set-MpPreference -#{find_command(p)} $#{Property.get(p)}", timeout: new_resource.timeout)
+      Chef::Log.info(cmd.to_s)
       Chef::Log.info(cmd.stdout)
     end
     only_if enabled?
