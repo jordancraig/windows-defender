@@ -35,6 +35,22 @@ module WindowsDefender
       end
     end
 
+    def find_vartype(val)
+      if val.is_a? String
+        "String"
+      elsif val.is_a? Array
+        "Array"
+      elsif val.is_a? Fixnum
+        "Integer"
+      elsif !!val == val
+        "Boolean"
+      elsif val.is_a? Float
+        "Float"
+      else
+        "Undefined"
+      end
+    end
+
     def return_properties
       PROPERTIES
     end
