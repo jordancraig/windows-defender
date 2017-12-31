@@ -37,17 +37,17 @@ module WindowsDefender
 
     def find_vartype(val)
       if val.is_a? String
-        "String"
+        'String'
       elsif val.is_a? Array
-        "Array"
-      elsif val.is_a? Fixnum
-        "Integer"
+        'Array'
+      elsif val.is_a? Integer
+        'Integer'
       elsif !!val == val
-        "Boolean"
+        'Boolean'
       elsif val.is_a? Float
-        "Float"
+        'Float'
       else
-        "Undefined"
+        'Undefined'
       end
     end
 
