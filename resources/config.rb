@@ -23,6 +23,11 @@ include WindowsDefender::Helper
 
 property :timeout, Integer, default: 600
 
+action :enable do
+  enable_defender
+  monitoring_state(true)
+end
+
 action :enable_monitoring do
   monitoring_state(true)
 end
